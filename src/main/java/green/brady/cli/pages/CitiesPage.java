@@ -11,9 +11,9 @@ public class CitiesPage implements Page {
 
     private final List<City> cities;
 
-    public CitiesPage() {
+    public CitiesPage(RequestHandler handler) {
         System.out.println("Getting cities...");
-        cities = RequestHandler.getCities()
+        cities = handler.getCities()
                 .getOrThrow(e -> new PageError("Failed to get cities", e))
                 .stream()
                 .sorted(Comparator.comparing(City::name))

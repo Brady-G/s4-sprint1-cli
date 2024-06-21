@@ -18,13 +18,13 @@ public class PassengerFlightsPage implements Page {
     private final List<Route> routes;
     private final Map<Integer, String> airports;
 
-    public PassengerFlightsPage(Passenger passenger) {
+    public PassengerFlightsPage(RequestHandler handler, Passenger passenger) {
         this.passenger = passenger;
-        this.routes = RequestHandler.getRoutesForPassenger(passenger.id())
+        this.routes = handler.getPassengerRoutes(passenger.id())
                 .getOrThrow(e -> new PageError("Failed to get passenger routes", e))
                 .stream()
                 .toList();
-        this.airports = RequestHandler.getAirports()
+        this.airports = handler.getAirports()
                 .getOrThrow(e -> new PageError("Failed to get airports", e))
                 .stream()
                 .collect(Collectors.toMap(Airport::id, Airport::name));

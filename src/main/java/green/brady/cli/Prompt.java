@@ -1,10 +1,15 @@
 package green.brady.cli;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Prompt {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+
+    public Prompt(InputStream source) {
+        this.scanner = new Scanner(source);
+    }
 
     public void waitForEnter() {
         System.out.println("Press enter to continue");

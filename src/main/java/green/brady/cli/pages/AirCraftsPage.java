@@ -19,18 +19,18 @@ public class AirCraftsPage implements Page {
     private final Map<Integer, List<Route>> routes;
     private final Map<Integer, String> airports;
 
-    public AirCraftsPage() {
+    public AirCraftsPage(RequestHandler handler) {
         System.out.println("Getting aircrafts...");
-        aircrafts = RequestHandler.getAircrafts()
+        aircrafts = handler.getAircrafts()
                 .getOrThrow(e -> new PageError("Failed to get aircrafts", e))
                 .stream()
                 .sorted(Comparator.comparing(AirCraft::airline))
                 .toList();
-        routes = RequestHandler.getRoutes()
+        routes = handler.getRoutes()
                 .getOrThrow(e -> new PageError("Failed to get routes", e))
                 .stream()
                 .collect(Collectors.groupingBy(Route::airCraft));
-        airports = RequestHandler.getAirports()
+        airports = handler.getAirports()
                 .getOrThrow(e -> new PageError("Failed to get airports", e))
                 .stream()
                 .collect(Collectors.toMap(Airport::id, Airport::name));

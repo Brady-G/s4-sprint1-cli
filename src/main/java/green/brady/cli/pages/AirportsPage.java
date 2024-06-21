@@ -5,7 +5,10 @@ import green.brady.model.Airport;
 import green.brady.model.City;
 import green.brady.requests.RequestHandler;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -14,13 +17,13 @@ public class AirportsPage implements Page {
     private final Map<Integer, String> cities;
     private final Map<Integer, Airport> airports;
 
-    public AirportsPage() {
+    public AirportsPage(RequestHandler handler) {
         System.out.println("Getting airports...");
-        airports = RequestHandler.getAirports()
+        airports = handler.getAirports()
                 .getOrThrow(e -> new PageError("Failed to get airports", e))
                 .stream()
                 .collect(Collectors.toMap(Airport::id, Function.identity()));
-        cities = RequestHandler.getCities()
+        cities = handler.getCities()
                 .getOrThrow(e -> new PageError("Failed to get cities", e))
                 .stream()
                 .collect(Collectors.toMap(City::id, City::name));

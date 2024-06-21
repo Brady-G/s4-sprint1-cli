@@ -10,10 +10,12 @@ import java.util.List;
 
 public class PassengersPage implements Page {
 
+    private final RequestHandler handler;
     private final List<Passenger> passengers;
 
-    public PassengersPage() {
-        this.passengers = RequestHandler.getPassengers()
+    public PassengersPage(RequestHandler handler) {
+        this.handler = handler;
+        this.passengers = handler.getPassengers()
                 .getOrThrow(e -> new PageError("Failed to get passengers", e))
                 .stream()
                 .toList();
@@ -47,7 +49,7 @@ public class PassengersPage implements Page {
             Page.divider();
             Passenger passenger = getPassenger(prompt);
             if (passenger == null) return;
-            new PassengerFlightsPage(passenger).display(prompt);
+            new PassengerFlightsPage(handler, passenger).display(prompt);
         }
     }
 }
