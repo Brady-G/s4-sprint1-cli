@@ -1,7 +1,9 @@
 package green.brady;
 
+import green.brady.cli.Prompt;
 import green.brady.cli.pages.*;
 import green.brady.cli.ErrorManager;
+import green.brady.cli.pages.passengers.PassengersPage;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -12,10 +14,11 @@ public class Main {
         put("Cities", CitiesPage::new);
         put("Airports", AirportsPage::new);
         put("Air Crafts", AirCraftsPage::new);
+        put("Passengers/Flights", PassengersPage::new);
     }};
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Prompt prompt = new Prompt();
 
         List<Supplier<Page>> pages = new ArrayList<>();
         StringBuilder options = new StringBuilder();
@@ -29,9 +32,7 @@ public class Main {
         while (true) {
             System.out.println(options);
 
-            System.out.println("Enter an option:");
-            int option = scanner.nextInt();
-            scanner.nextLine();
+            int option = prompt.promptInt("Enter an option: ");
 
             if (option < 1 || option > pages.size() + 1) {
                 System.out.println("Invalid option");
@@ -40,9 +41,8 @@ public class Main {
                 return;
             } else {
                 try {
-                    pages.get(option - 1).get().display();
-                    System.out.println("Press enter to continue...");
-                    scanner.nextLine();
+                    pages.get(option - 1).get().display(prompt);
+                    prompt.waitForEnter();
                 } catch (PageError error) {
                     System.out.println("An error occurred: " + error.getMessage());
                     ErrorManager.logError(error.getCause());

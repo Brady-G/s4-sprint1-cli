@@ -2,10 +2,7 @@ package green.brady.requests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import green.brady.model.AirCraft;
-import green.brady.model.Airport;
-import green.brady.model.City;
-import green.brady.model.Route;
+import green.brady.model.*;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -49,5 +46,13 @@ public class RequestHandler {
 
     public static Response<List<AirCraft>> getAircrafts() {
         return get("aircrafts", new TypeToken<>() {});
+    }
+
+    public static Response<List<Passenger>> getPassengers() {
+        return get("passengers", new TypeToken<>() {});
+    }
+
+    public static Response<List<Route>> getRoutesForPassenger(int passenger) {
+        return get("passengers/%d/routes".formatted(passenger), new TypeToken<>() {});
     }
 }

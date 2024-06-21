@@ -1,6 +1,7 @@
 package green.brady.cli.pages;
 
 import green.brady.cli.Pair;
+import green.brady.cli.Prompt;
 import green.brady.model.AirCraft;
 import green.brady.model.Airport;
 import green.brady.model.Route;
@@ -44,7 +45,7 @@ public class AirCraftsPage implements Page {
     }
 
     @Override
-    public void display() {
+    public void display(Prompt prompt) {
         Page.divider();
         System.out.println();
 

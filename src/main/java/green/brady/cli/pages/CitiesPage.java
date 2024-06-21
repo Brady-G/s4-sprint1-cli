@@ -1,5 +1,6 @@
 package green.brady.cli.pages;
 
+import green.brady.cli.Prompt;
 import green.brady.model.City;
 import green.brady.requests.RequestHandler;
 
@@ -20,7 +21,7 @@ public class CitiesPage implements Page {
     }
 
     @Override
-    public void display() {
+    public void display(Prompt prompt) {
         Page.divider();
         System.out.println("<id> Name [State] (Population)");
         Page.divider();

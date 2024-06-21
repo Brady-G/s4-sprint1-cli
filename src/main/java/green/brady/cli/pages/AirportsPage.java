@@ -1,13 +1,11 @@
 package green.brady.cli.pages;
 
+import green.brady.cli.Prompt;
 import green.brady.model.Airport;
 import green.brady.model.City;
 import green.brady.requests.RequestHandler;
 
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -33,7 +31,7 @@ public class AirportsPage implements Page {
     }
 
     @Override
-    public void display() {
+    public void display(Prompt prompt) {
         Page.divider();
         System.out.println("<id> Name (Code)");
         Page.divider();
