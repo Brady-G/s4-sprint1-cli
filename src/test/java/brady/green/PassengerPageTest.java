@@ -19,7 +19,7 @@ public class PassengerPageTest extends BasePageTest {
         super.setup();
         CliApp.start(
                 new TestPrompt(Map.of(
-                        "Enter an option: ", new ArrayList<>(List.of("4", "5")),
+                        "Enter an option: ", List.of("4", "5"),
                         "Enter the id of the passenger you would like to view, or 0 to cancel:", new ArrayList<>(List.of("0"))
                 )),
                 new TestRequestHandler()

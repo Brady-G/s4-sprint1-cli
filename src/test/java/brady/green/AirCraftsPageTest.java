@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +17,7 @@ public class AirCraftsPageTest extends BasePageTest {
     public void setup() {
         super.setup();
         CliApp.start(
-                new TestPrompt(Map.of("Enter an option: ", new ArrayList<>(List.of("3", "5")))),
+                new TestPrompt(Map.of("Enter an option: ", List.of("3", "5"))),
                 new TestRequestHandler()
         );
     }

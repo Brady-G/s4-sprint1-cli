@@ -3,16 +3,20 @@ package brady.green.utils;
 import green.brady.cli.Prompt;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TestPrompt extends Prompt {
 
-    private final Map<String, List<String>> inputs;
+    private final Map<String, List<String>> inputs = new HashMap<>();
 
     public TestPrompt(Map<String, List<String>> inputs) {
         super(InputStream.nullInputStream());
-        this.inputs = inputs;
+        inputs.forEach((prompt, responses) ->
+            this.inputs.put(prompt, new ArrayList<>(responses))
+        );
     }
 
     @Override
