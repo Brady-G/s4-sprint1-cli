@@ -16,7 +16,7 @@ public class CitiesPage implements Page {
         cities = handler.getCities()
                 .getOrThrow(e -> new PageError("Failed to get cities", e))
                 .stream()
-                .sorted(Comparator.comparing(City::name))
+                .sorted(Comparator.comparing(City::id))
                 .toList();
     }
 
