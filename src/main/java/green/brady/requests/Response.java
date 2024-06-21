@@ -13,6 +13,14 @@ public class Response<T> {
         this.error = error;
     }
 
+    public static <T> Response<T> of(T data) {
+        return new Response<>(data, null);
+    }
+
+    public static <T> Response<T> error(Throwable error) {
+        return new Response<>(null, error);
+    }
+
     public <E extends Exception> T getOrThrow(Function<Throwable, E> handler) throws E {
         if (error != null) {
             throw handler.apply(error);
@@ -50,9 +58,9 @@ public class Response<T> {
 
     public <R> Response<R> map(Function<T, R> mapper) {
         if (error != null) {
-            return new Response<>(null, error);
+            return Response.error(error);
         } else {
-            return new Response<>(mapper.apply(data), null);
+            return Response.of(mapper.apply(data));
         }
     }
 }

@@ -26,9 +26,9 @@ public class ServerRequestHandler implements RequestHandler {
 
         try {
             var res = CLIENT.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
-            return new Response<>(GSON.fromJson(res.body(), token), null);
+            return Response.of(GSON.fromJson(res.body(), token));
         } catch (Exception e) {
-            return new Response<>(null, e);
+            return Response.error(e);
         }
     }
 
